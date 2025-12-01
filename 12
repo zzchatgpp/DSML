@@ -1,0 +1,11 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\IRIS.csv")
+
+numeric = df.select_dtypes(include=['float64', 'int64'])
+
+numeric.boxplot(figsize=(10,6))
+plt.show()
+
+print(numeric.describe())
