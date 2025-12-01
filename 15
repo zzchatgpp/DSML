@@ -1,0 +1,20 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\Titanic.csv")
+
+sns.countplot(data=df, x="Survived")
+plt.show()
+
+sns.countplot(data=df, x="Sex", hue="Survived")
+plt.show()
+
+sns.countplot(data=df, x="Pclass", hue="Survived")
+plt.show()
+
+sns.histplot(data=df, x="Age", hue="Survived", kde=True)
+plt.show()
+
+sns.countplot(data=df, x="Embarked", hue="Survived")
+plt.show()
