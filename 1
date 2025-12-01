@@ -1,0 +1,10 @@
+import pandas as pd
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\Titanic.csv")
+
+print(df.head())
+print(df[['Name', 'Sex', 'Age']].head())
+print(df.iloc[:5])
+print(df.sort_values(by='Age').head())
+print(df.describe())
+print(df.dtypes)
