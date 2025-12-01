@@ -1,0 +1,11 @@
+import pandas as pd
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\Covid Vaccine Statewise.csv")
+
+print(df.describe(include='all'))
+
+print("\nState-wise First Dose Count:\n")
+print(df.groupby("State")["First Dose Administered"].sum())
+
+print("\nState-wise Second Dose Count:\n")
+print(df.groupby("State")["Second Dose Administered"].sum())
