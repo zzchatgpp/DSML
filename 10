@@ -1,0 +1,43 @@
+import numpy as np
+
+points = {
+    'P1': np.array([2,10]),
+    'P2': np.array([2,5]),
+    'P3': np.array([8,4]),
+    'P4': np.array([5,8]),
+    'P5': np.array([7,5]),
+    'P6': np.array([6,4]),
+    'P7': np.array([1,2]),
+    'P8': np.array([4,9])
+}
+
+m1 = points['P1'].copy()
+m2 = points['P4'].copy()
+m3 = points['P7'].copy()
+
+clusters = {1: [], 2: [], 3: []}
+
+for name, p in points.items():
+    d1 = np.linalg.norm(p - m1)
+    d2 = np.linalg.norm(p - m2)
+    d3 = np.linalg.norm(p - m3)
+    dmin = min(d1, d2, d3)
+    if dmin == d1:
+        clusters[1].append(name)
+    elif dmin == d2:
+        clusters[2].append(name)
+    else:
+        clusters[3].append(name)
+
+m1_new = np.mean([points[n] for n in clusters[1]], axis=0)
+m2_new = np.mean([points[n] for n in clusters[2]], axis=0)
+m3_new = np.mean([points[n] for n in clusters[3]], axis=0)
+
+print("Cluster1:", clusters[1])
+print("Cluster2:", clusters[2])
+print("Cluster3:", clusters[3])
+print("P6 belongs to:", "Cluster1" if "P6" in clusters[1] else ("Cluster2" if "P6" in clusters[2] else "Cluster3"))
+print("Population around m3:", len(clusters[3]))
+print("Updated m1:", tuple(np.round(m1_new, 6)))
+print("Updated m2:", tuple(np.round(m2_new, 6)))
+print("Updated m3:", tuple(np.round(m3_new, 6)))
