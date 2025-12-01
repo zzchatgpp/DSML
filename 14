@@ -1,0 +1,11 @@
+import pandas as pd
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\Covid Vaccine Statewise.csv")
+
+print(df.describe(include='all'))
+
+print("\nTotal Males Vaccinated:\n")
+print(df["Male(Individuals Vaccinated)"].sum())
+
+print("\nTotal Females Vaccinated:\n")
+print(df["Female(Individuals Vaccinated)"].sum())
