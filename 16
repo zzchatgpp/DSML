@@ -1,0 +1,9 @@
+import seaborn as sns
+import matplotlib.pyplot as plt
+import pandas as pd
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\Titanic.csv")
+
+sns.histplot(df["Fare"], bins=30, kde=True)
+plt.title("Fare Distribution")
+plt.show()
