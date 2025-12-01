@@ -1,0 +1,25 @@
+import pandas as pd
+import math
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\Lipstick.csv")
+
+def entropy(col):
+    counts = col.value_counts()
+    total = len(col)
+    return -sum((c/total) * math.log2(c/total) for c in counts)
+
+def info_gain(df, feature, target="Buys"):
+    base = entropy(df[target])
+    values = df[feature].unique()
+    weighted = 0
+    for v in values:
+        subset = df[df[feature] == v]
+        weighted += (len(subset)/len(df)) * entropy(subset[target])
+    return base - weighted
+
+features = [c for c in df.columns if c != "Buys"]
+
+for f in features:
+    print(f, "IG:", info_gain(df, f))
+
+print("\nRoot Node:", max(features, key=lambda f: info_gain(df, f)))
