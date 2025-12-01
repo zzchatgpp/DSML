@@ -1,0 +1,15 @@
+import pandas as pd
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\Titanic.csv")
+
+print(df.dtypes)
+print(df.nunique())
+print(df.isnull().sum())
+
+num_cols = df.select_dtypes(include=['float64','int64']).columns
+df[num_cols] = df[num_cols].astype('float32')
+
+df = df.fillna(df.median(numeric_only=True))
+df = df.fillna(df.mode().iloc[0])
+
+print(df.isnull().sum())
