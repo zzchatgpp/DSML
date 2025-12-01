@@ -1,0 +1,11 @@
+import pandas as pd
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\House Data.csv")
+
+cat_cols = df.select_dtypes(include=['object']).columns
+num_cols = df.select_dtypes(include=['int64','float64']).columns
+
+for c in cat_cols:
+    for n in num_cols:
+        print(f"\nSummary statistics of {n} grouped by {c}:\n")
+        print(df.groupby(c)[n].agg(['mean','median','min','max','std']))
