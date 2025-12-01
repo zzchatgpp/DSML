@@ -1,0 +1,12 @@
+import pandas as pd
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\Telecom Churn.csv")
+num = df.select_dtypes(include=['int64','float64'])
+
+print(num.min())
+print(num.max())
+print(num.mean())
+print(num.max() - num.min())
+print(num.std())
+print(num.var())
+print(num.quantile([0.25,0.50,0.75]))
