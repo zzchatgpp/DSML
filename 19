@@ -1,0 +1,11 @@
+import pandas as pd
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\IRIS.csv")
+
+print(df.groupby("species").agg([
+    'mean',
+    'std',
+    lambda x: x.quantile(0.25),
+    lambda x: x.quantile(0.5),
+    lambda x: x.quantile(0.75)
+]))
