@@ -1,0 +1,30 @@
+import pandas as pd
+import math
+
+data = {
+    "Age": ["Young","Young","Middle","Old","Old","Old","Middle","Young","Young","Old","Young","Middle","Middle","Old"],
+    "Income": ["High","High","High","Medium","Low","Low","Low","Medium","Low","Medium","Medium","Medium","High","Medium"],
+    "Married": ["No","No","No","No","Yes","Yes","No","No","Yes","Yes","Yes","No","Yes","No"],
+    "Health": ["Fair","Good","Fair","Fair","Fair","Good","Good","Fair","Fair","Fair","Good","Good","Fair","Good"],
+    "Class": ["No","No","Yes","Yes","Yes","No","Yes","No","Yes","Yes","Yes","Yes","Yes","No"]
+}
+
+df = pd.DataFrame(data)
+
+print("\nFrequency Table for Age vs Class:\n")
+freq = pd.crosstab(df["Age"], df["Class"])
+print(freq)
+
+def entropy(col):
+    counts = col.value_counts()
+    total = len(col)
+    return -sum((c/total)*math.log2(c/total) for c in counts)
+
+total_entropy = entropy(df["Class"])
+
+gain = total_entropy
+for age_group in df["Age"].unique():
+    subset = df[df["Age"] == age_group]["Class"]
+    gain -= (len(subset)/len(df)) * entropy(subset)
+
+print("\nInformation Gain on splitting by Age:", gain)
