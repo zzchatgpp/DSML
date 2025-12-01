@@ -1,0 +1,36 @@
+import numpy as np
+
+points = {
+    'P1': np.array([0.10, 0.60]),
+    'P2': np.array([0.15, 0.71]),
+    'P3': np.array([0.08, 0.90]),
+    'P4': np.array([0.16, 0.85]),
+    'P5': np.array([0.20, 0.30]),
+    'P6': np.array([0.25, 0.50]),
+    'P7': np.array([0.24, 0.10]),
+    'P8': np.array([0.30, 0.20])
+}
+
+m1 = points['P1'].copy()
+m2 = points['P8'].copy()
+
+cluster1 = []
+cluster2 = []
+
+for name, p in points.items():
+    d1 = np.linalg.norm(p - m1)
+    d2 = np.linalg.norm(p - m2)
+    if d1 <= d2:
+        cluster1.append(name)
+    else:
+        cluster2.append(name)
+
+m1_new = np.mean([points[n] for n in cluster1], axis=0)
+m2_new = np.mean([points[n] for n in cluster2], axis=0)
+
+print("Cluster1:", cluster1)
+print("Cluster2:", cluster2)
+print("P6 belongs to:", "Cluster1" if "P6" in cluster1 else "Cluster2")
+print("Population around m2:", len(cluster2))
+print("Updated m1:", tuple(np.round(m1_new, 6)))
+print("Updated m2:", tuple(np.round(m2_new, 6)))
