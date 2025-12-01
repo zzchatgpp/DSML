@@ -1,0 +1,19 @@
+import pandas as pd
+import numpy as np
+
+df = pd.read_csv(r"C:\Users\mohdk\Downloads\datasets\IRIS.csv")
+
+X = df.iloc[:, :-1].values
+
+np.random.seed(1)
+indices = np.random.choice(len(X), 4, replace=False)
+centroids = X[indices]
+
+for _ in range(10):
+    distances = np.array([[np.linalg.norm(p - c) for c in centroids] for p in X])
+    labels = np.argmin(distances, axis=1)
+    new_centroids = np.array([X[labels == k].mean(axis=0) for k in range(4)])
+    centroids = new_centroids
+
+print("Final Cluster Means:")
+print(centroids)
